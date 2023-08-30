@@ -1,3 +1,6 @@
+import * as THREE from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.module.min.js';
+import { OrbitControls } from './OrbitControls.js';
+
 // Create a Scene
 const scene = new THREE.Scene();
 
@@ -22,17 +25,15 @@ const sphere = new THREE.Mesh(geometry, material);
 // Add Sphere to Scene
 scene.add(sphere);
 
-// Orbit Controls
-const controls = new THREE.OrbitControls(camera, renderer.domElement);
-controls.addEventListener('change', () => {
-  renderer.render(scene, camera);
-});
+// Create controls
+const controls = new OrbitControls(camera, renderer.domElement);
 
-// Animation 
+// Animation
 function animate() {
-    requestAnimationFrame(animate);
-    renderer.render(scene, camera);
-  }
+  requestAnimationFrame(animate);
+  controls.update();
+  renderer.render(scene, camera);
+}
 
 // Start the Animation
 animate();
